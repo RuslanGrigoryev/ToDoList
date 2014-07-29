@@ -15,7 +15,7 @@ $(function () {
 	   else {
 	   		for (var i = 1; i < $itemLength; i++) {
 	   			if ( localStorage.getItem('Todoitem' + i) != "empty" ) {
-	   				$inner.append("<li class='list__item'>"+ "<span class='list__item_span'>" + localStorage.getItem('Todoitem'+i) + "</span>" + "<a href='#' class='list__link list__link--edit'></a>" + "<a href='#' class='list__link list__link--close'></a>"+"</li>");
+	   				$inner.append("<li class='list__item'>"+ "<a href='#' class='list__link list__link--done'></a>" + "<span class='list__item_span'>" + localStorage.getItem('Todoitem'+i) + "</span>" + "<a href='#' class='list__link list__link--edit'></a>" + "<a href='#' class='list__link list__link--close'></a>"+"</li>");
 	   			}	
 	   		}
 	   }
@@ -31,7 +31,7 @@ $(function () {
 					if (localStorage.getItem("Todoitem"+i) == "empty") {
 
 						localStorage.setItem("Todoitem"+i, $val);
-						$inner.append("<li class='list__item'>" + "<span class='list__item_span'>" + $val + "</span>" + "<a href='#' class='list__link list__link--edit'></a>"  + "<a href='#' class='list__link list__link--close'></a>" + "</li>");
+						$inner.append("<li class='list__item'>"+ "<a href='#' class='list__link list__link--done'></a>" + "<span class='list__item_span'>" + $val + "</span>" + "<a href='#' class='list__link list__link--edit'></a>"  + "<a href='#' class='list__link list__link--close'></a>" + "</li>");
 						$self.val("");
 
 						return;
@@ -78,7 +78,7 @@ $(function () {
 
 		    $spanElem.remove();
 		    $self.closest('.list__item').prepend("<input type='text' class='list__item__input' />")
-		    $self.prev('.list__item__input').val($spanText);
+		    $self.siblings('.list__item__input').val($spanText);
 
 	});
 
@@ -93,13 +93,25 @@ $(function () {
 
 				localStorage.setItem("Todoitem"+$editElem, $val);
 				$self.closest('.list__item').remove();
-				$inner.append("<li class='list__item'>" + "<span class='list__item_span'>" + $val + "</span>" + "<a href='#' class='list__link list__link--edit'></a>"  + "<a href='#' class='list__link list__link--close'></a>" + "</li>");
+				$inner.append("<li class='list__item'>" + "<a href='#' class='list__link list__link--done'></a>"+ "<span class='list__item_span'>" + $val + "</span>" + "<a href='#' class='list__link list__link--edit'></a>"  + "<a href='#' class='list__link list__link--close'></a>" + "</li>");
 				
 
 			}
 
 	});
 
+	// Обработчик клика по ссылке done
+
+	$('.list').on('click', '.list__link--done', function (e) {
+
+		e.preventDefault();
+
+		var $self = $(this);
+		$self.toggleClass('list__link--done--active');
+
+	});
+
+	// Очистка localstorage
 	$('#clear').on('click', function () {
 
 		localStorage.clear();

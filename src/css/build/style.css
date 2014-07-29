@@ -75,8 +75,9 @@ table {
 }
 .list__item {
 	position: relative;
-	padding: 5px 10px;
+	padding: 5px 10px 5px 25px;
 	color: #2980b9;
+	list-style: none;
 }
 .list__item_span {
 	display: inline-block;
@@ -101,6 +102,17 @@ table {
 .list__link--edit {
 	background: url(../../images/markup/sprite.png) -3px -20px no-repeat;
 	right: 23px;
+}
+.list__link--done {
+	background: url(../../images/markup/done-sprite.png) 0px 0px no-repeat;
+	left: 0;
+	top: 9px;
+	margin: 0px;
+	width: 21px;
+	height: 21px;
+}
+.list__link--done--active {
+	background: url(../../images/markup/done-sprite.png) 0px -21px no-repeat;
 }
 .list__item__input {
 	background: none;
