@@ -1,14 +1,16 @@
 $(function () {
 	var $input = $('#newTodo'),
 	    $inner = $('#inner'),
+	    $innerDone = $('#innerDone'),
 	    $itemLength = 5,
 	    $editElem = null;
 
 	   // если еще не было ничего записано в localStorage
-	   if (!localStorage.getItem('Todoitem1')) {
+	   if (!localStorage.getItem('Todoitem1') && !localStorage.getItem('TodoitemDone1')) {
 
 		  for (var i = 1; i < $itemLength; i++) {
 		  	localStorage.setItem("Todoitem"+i, "empty");
+		  	localStorage.setItem("TodoitemDone"+i, "empty");
 		  }
 	   	
 	   }// если было, то берем значения из localStorage и создаем новый список
@@ -17,6 +19,9 @@ $(function () {
 	   			if ( localStorage.getItem('Todoitem' + i) != "empty" ) {
 	   				$inner.append("<li class='list__item'>"+ "<a href='#' class='list__link list__link--done'></a>" + "<span class='list__item_span'>" + localStorage.getItem('Todoitem'+i) + "</span>" + "<a href='#' class='list__link list__link--edit'></a>" + "<a href='#' class='list__link list__link--close'></a>"+"</li>");
 	   			}	
+	   			if ( localStorage.getItem('TodoitemDone' + i) != "empty" ) {
+	   				$innerDone.append("<li class='list__item'>" + "<span class='list__item_span'>" + localStorage.getItem('TodoitemDone'+i) + "</span>"+"</li>"); 				
+	   			} 
 	   		}
 	   }
 	// Обработчик создания дела
@@ -67,7 +72,7 @@ $(function () {
 		e.preventDefault();
 
 		var $self     = $(this),
-			$spanElem = $self.prev('.list__item_span'),
+			$spanElem = $self.siblings('.list__item_span'),
 		    $spanText = $spanElem.text();
 
 		    for (var i=1; i < $itemLength; i++) {
@@ -106,8 +111,27 @@ $(function () {
 
 		e.preventDefault();
 
-		var $self = $(this);
-		$self.toggleClass('list__link--done--active');
+		var $self     = $(this),
+			$spanElem = $self.siblings('.list__item_span'),
+		    $spanText = $spanElem.text();
+
+		$self.toggleClass('list__link--done--active').closest('.list__item').fadeOut('slow', function() {
+
+			console.log($spanText);
+
+			for (var i=1; i < $itemLength; i++) {
+				if ( localStorage.getItem("Todoitem"+i) == $spanText ) {
+					$editElem = i;
+				}
+			}
+
+			localStorage.setItem("Todoitem" + $editElem, "empty");
+			localStorage.setItem("TodoitemDone" + $editElem, $spanText);
+
+			$innerDone.prepend("<li class='list__item'>"+"<span class='list__item_span'>" +localStorage.getItem("TodoitemDone" + $editElem) + "</span>" +"</li>");
+
+			$(this).remove();
+		});
 
 	});
 

@@ -69,6 +69,9 @@ table {
 	text-align: center;
 	font-weight: bold;
 }
+.todo_header--done {
+	margin: 10px 0 46px 0;
+}
 .list {
 	width: 335px;
 	margin-top: 10px;
