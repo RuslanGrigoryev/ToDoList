@@ -34,6 +34,7 @@ a, a:hover {
 body {
 	line-height: 1;
 	padding: 10px;
+	position: relative;
 	font-size: 14px;
 	color: #ecf0f1;
 	background: url(../../images/markup/bg.png);
@@ -51,10 +52,21 @@ table {
 	border-spacing: 0;
 }
 /*main styles*/
+.page {
+	width: 960px;
+	height: 500px;
+	margin: 0 auto;
+}
+.block {
+	float: left;
+	width: 480px;
+	height: 500px;
+}
 .todo_header {
 	font-size: 20px;
 	text-transform: uppercase;
 	margin: 10px 0;
+	text-align: center;
 	font-weight: bold;
 }
 .list {
@@ -96,8 +108,16 @@ table {
 	outline: none;
 	border: none;
 	width: 265px;
+	font-size: 18px;
+	padding-left: 4px;
 }
 .list__item__input:focus, .list__item__input:active {
 	outline: none;
 	border: none;
+}
+.clear-btn {
+	position: absolute;
+	right: 10px;
+	top: 10px;
+	z-index: 999;
 }

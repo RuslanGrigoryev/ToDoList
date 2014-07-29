@@ -6,16 +6,26 @@
 	<link rel="stylesheet" href="css/build/style.css">
 </head>
 <body>
+<a href="#" id="clear" class="clear-btn">Clear List and LocalStorage</a>
 
-	<h1 class="todo_header">Список дел:</h1>
-
-  <label for="newTodo">Введите что нужно сделать :</label>
-  <input type="text" id="newTodo">
-  <a href="#" id="clear">Clear List and LocalStorage</a>
+<div class="page">
   
-  <ul id="inner" class="list">
+  <div class="block">
+    <h1 class="todo_header">Do it:</h1>
+
+    <label for="newTodo">Введите что нужно сделать :</label>
+    <input type="text" id="newTodo">
     
-  </ul>
+    <ul id="inner" class="list"></ul>
+  </div>
+
+  <div class="block">
+    <h1 class="todo_header">Done:</h1>
+    
+    <ul id="innerDone" class="list"></ul>
+  </div>
+
+</div>
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
   <script src="js/script.js"></script>
 </body>
