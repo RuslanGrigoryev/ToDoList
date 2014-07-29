@@ -100,8 +100,14 @@ $(function () {
 
 	});
 
-});
+	$('#clear').on('click', function () {
 
+		localStorage.clear();
+		$('.list__item').remove();	
+		return false;
+	})
+
+});
 
 
 // 1. Нужно добавить значки редактирования и удаления элементов из списка дел      DONE

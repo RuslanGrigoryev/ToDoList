@@ -28,6 +28,9 @@ article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
 	display: block;
 }
+a, a:hover {
+	color: #fff;
+}
 body {
 	line-height: 1;
 	padding: 10px;
