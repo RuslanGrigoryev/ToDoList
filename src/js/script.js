@@ -59,11 +59,12 @@ $(function () {
 		    	if (localStorage.getItem("Todoitem"+i) == $listText) {
 
 		    		localStorage.setItem("Todoitem"+i, "empty");
-					$self.closest('.list__item').remove();
+					$self.closest('.list__item').fadeOut('slow', function () {
+						$(this).remove();						
+					})
 
 		    	}
 		    }
-
 
 	});
 
@@ -145,6 +146,7 @@ $(function () {
 		return false;
 	})
 
+	// Сортировка  невыполненных дел
 	$inner.sortable({
 		placeholder: "ui-state-highlight",
 		cursor     : "move",
