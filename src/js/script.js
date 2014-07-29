@@ -2,20 +2,20 @@ $(function () {
 	var $input = $('#newTodo'),
 	    $inner = $('#inner'),
 	    $innerDone = $('#innerDone'),
-	    $itemLength = 5,
+	    $ITEMLENGTH = 10,
 	    $editElem = null;
 
 	   // если еще не было ничего записано в localStorage
 	   if (!localStorage.getItem('Todoitem1') && !localStorage.getItem('TodoitemDone1')) {
 
-		  for (var i = 1; i < $itemLength; i++) {
+		  for (var i = 1; i < $ITEMLENGTH; i++) {
 		  	localStorage.setItem("Todoitem"+i, "empty");
 		  	localStorage.setItem("TodoitemDone"+i, "empty");
 		  }
 	   	
 	   }// если было, то берем значения из localStorage и создаем новый список
 	   else {
-	   		for (var i = 1; i < $itemLength; i++) {
+	   		for (var i = 1; i < $ITEMLENGTH; i++) {
 	   			if ( localStorage.getItem('Todoitem' + i) != "empty" ) {
 	   				$inner.append("<li class='list__item'>"+ "<a href='#' class='list__link list__link--done'></a>" + "<span class='list__item_span'>" + localStorage.getItem('Todoitem'+i) + "</span>" + "<a href='#' class='list__link list__link--edit'></a>" + "<a href='#' class='list__link list__link--close'></a>"+"</li>");
 	   			}	
@@ -31,7 +31,7 @@ $(function () {
 
 			if (event.keyCode == 13) {
 
-				for ( var i = 1; i < $itemLength; i++ ) {
+				for ( var i = 1; i < $ITEMLENGTH; i++ ) {
 
 					if (localStorage.getItem("Todoitem"+i) == "empty") {
 
@@ -55,7 +55,7 @@ $(function () {
 		var $self     = $(this),
 		    $listText = $self.closest('.list__item').text();
 
-		    for ( var i = 0; i < $itemLength; i++ ) {
+		    for ( var i = 0; i < $ITEMLENGTH; i++ ) {
 		    	if (localStorage.getItem("Todoitem"+i) == $listText) {
 
 		    		localStorage.setItem("Todoitem"+i, "empty");
@@ -75,7 +75,7 @@ $(function () {
 			$spanElem = $self.siblings('.list__item_span'),
 		    $spanText = $spanElem.text();
 
-		    for (var i=1; i < $itemLength; i++) {
+		    for (var i=1; i < $ITEMLENGTH; i++) {
 		    	if ( localStorage.getItem("Todoitem"+i) == $spanText ) {
 		    		$editElem = i;
 		    	}
@@ -119,7 +119,7 @@ $(function () {
 
 			console.log($spanText);
 
-			for (var i=1; i < $itemLength; i++) {
+			for (var i=1; i < $ITEMLENGTH; i++) {
 				if ( localStorage.getItem("Todoitem"+i) == $spanText ) {
 					$editElem = i;
 				}
@@ -129,6 +129,8 @@ $(function () {
 			localStorage.setItem("TodoitemDone" + $editElem, $spanText);
 
 			$innerDone.prepend("<li class='list__item'>"+"<span class='list__item_span'>" +localStorage.getItem("TodoitemDone" + $editElem) + "</span>" +"</li>");
+
+
 
 			$(this).remove();
 		});
@@ -142,5 +144,11 @@ $(function () {
 		$('.list__item').remove();	
 		return false;
 	})
+
+	$inner.sortable({
+		placeholder: "ui-state-highlight",
+		cursor     : "move",
+		revert     : true
+	});
 
 });
