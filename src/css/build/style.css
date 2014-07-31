@@ -73,7 +73,6 @@ table {
 	margin: 10px 0 46px 0;
 }
 .list {
-	width: 335px;
 	margin-top: 10px;
 }
 .list__done .list__item_span {
@@ -90,6 +89,7 @@ table {
 	display: inline-block;
 	padding: 4px;
 	font-size: 20px;
+	width: 265px;
 }
 .list__link {
 	position: absolute;
@@ -129,6 +129,9 @@ table {
 	width: 265px;
 	font-size: 18px;
 	padding-left: 4px;
+}
+.list__item__date {
+	color: #fff;
 }
 .list__item__input:focus, .list__item__input:active {
 	outline: none;

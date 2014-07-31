@@ -23,6 +23,8 @@ $(function () {
 	   				$innerDone.append("<li class='list__item'>" + "<span class='list__item_span'>" + localStorage.getItem('TodoitemDone'+i) + "</span>"+"</li>"); 				
 	   			} 
 	   		}
+
+	   		sortStorage();
 	   }
 	// Обработчик создания дела
 	$input.keyup(function(event) {
@@ -61,7 +63,7 @@ $(function () {
 		    		localStorage.setItem("Todoitem"+i, "empty");
 					$self.closest('.list__item').fadeOut('slow', function () {
 						$(this).remove();						
-					})
+					});
 
 		    	}
 		    }
@@ -147,10 +149,33 @@ $(function () {
 	})
 
 	// Сортировка  невыполненных дел
-	$inner.sortable({
+	/*$inner.sortable({
 		placeholder: "ui-state-highlight",
 		cursor     : "move",
 		revert     : true
-	});
+	});*/
+
+	
+
+function sortStorage () {
+	for (var i = 1; i < $ITEMLENGTH; i++) {
+
+		
+		
+	}
+}
 
 });
+
+function getCurrentDate () {
+
+	var dt = new Date(),
+	month = parseInt(dt.getUTCMonth())+1,
+	day = dt.getUTCDate(),
+	year = dt.getUTCFullYear(),
+	hours = dt.getHours(),
+	minutes = dt.getMinutes(),
+	currentDate = hours+":"+minutes+"  "+day+"/"+month+"/"+year+".";
+
+	return currentDate;
+}
